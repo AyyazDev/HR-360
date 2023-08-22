@@ -19,7 +19,7 @@ const Calendar1 = () => {
 
   const fetchEvents = () => {
     axios
-      .get("https://hr-360.vercel.app/events")
+      .get("/api/events")
       .then((response) => {
         // Make sure the response data is in the correct format for react-big-calendar
         const formattedEvents = response.data.map((event) => ({
@@ -45,7 +45,7 @@ const Calendar1 = () => {
     }
 
     axios
-      .post("https://hr-360.vercel.app/events", newEvent)
+      .post("/api/events", newEvent)
       .then((response) => {
         const formattedEvent = {
           ...response.data,
@@ -71,7 +71,7 @@ const Calendar1 = () => {
       return;
     } else {
       axios
-        .put(`https://hr-360.vercel.app/events/${updatedEvent._id}`, updatedEvent)
+        .put(`/api/events/${updatedEvent._id}`, updatedEvent)
         .then((response) => {
           const updatedEvents = events.map((event) =>
             event._id === response.data._id ? response.data : event
@@ -86,7 +86,7 @@ const Calendar1 = () => {
 
   const handleEventDelete = (eventToDelete) => {
     axios
-      .delete(`https://hr-360.vercel.app/events/${eventToDelete._id}`)
+      .delete(`/api/events/${eventToDelete._id}`)
       .then(() => {
         const updatedEvents = events.filter(
           (event) => event._id !== eventToDelete._id

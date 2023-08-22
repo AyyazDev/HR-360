@@ -32,7 +32,7 @@ export const listProducts = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`https://hr-360.vercel.app/products/all`, config);
+    const { data } = await axios.get(`/api/products/all`, config);
 
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {
@@ -65,7 +65,7 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`https://hr-360.vercel.app/products/${id}`, config);
+    await axios.delete(`/api/products/${id}`, config);
 
     dispatch({ type: PRODUCT_DELETE_SUCCESS });
   } catch (error) {
@@ -101,7 +101,7 @@ export const createProduct =
       };
 
       const { data } = await axios.post(
-        `https://hr-360.vercel.app/products/`,
+        `/api/products/`,
         { name, email, dept, experience, designation, image, salary },
         config
       );
@@ -126,7 +126,7 @@ export const createProduct =
 export const editProduct = (id) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_EDIT_REQUEST });
-    const { data } = await axios.get(`https://hr-360.vercel.app/products/${id}`);
+    const { data } = await axios.get(`/api/products/${id}`);
     dispatch({ type: PRODUCT_EDIT_SUCCESS, payload: data });
   } catch (error) {
     const message =
@@ -160,7 +160,7 @@ export const updateProduct = (product) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `https://hr-360.vercel.app/products/${product._id}`,
+      `/api/products/${product._id}`,
       product,
       config
     );

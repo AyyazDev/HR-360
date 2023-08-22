@@ -32,7 +32,7 @@ export const listOrders = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`https://hr-360.vercel.app/orders/all`, config);
+    const { data } = await axios.get(`/api/orders/all`, config);
 
     dispatch({ type: ORDER_LIST_SUCCESS, payload: data });
   } catch (error) {
@@ -65,7 +65,7 @@ export const deleteOrder = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`https://hr-360.vercel.app/orders/${id}`, config);
+    await axios.delete(`/api/orders/${id}`, config);
 
     dispatch({ type: ORDER_DELETE_SUCCESS });
   } catch (error) {
@@ -107,7 +107,7 @@ export const createOrder =
       };
 
       const { data } = await axios.post(
-        `https://hr-360.vercel.app/orders/`,
+        `/api/orders/`,
         { name,
           head,
           temp,
@@ -138,7 +138,7 @@ export const createOrder =
 export const editOrder = (id) => async (dispatch) => {
   try {
     dispatch({ type: ORDER_EDIT_REQUEST });
-    const { data } = await axios.get(`https://hr-360.vercel.app/orders/${id}`);
+    const { data } = await axios.get(`/api/orders/${id}`);
     dispatch({ type: ORDER_EDIT_SUCCESS, payload: data });
   } catch (error) {
     const message =
@@ -172,7 +172,7 @@ export const updateOrder = (order) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `https://hr-360.vercel.app/orders/${order._id}`,
+      `/api/orders/${order._id}`,
       order,
       config
     );

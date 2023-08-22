@@ -32,7 +32,7 @@ export const listTickets = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`https://hr-360.vercel.app/tickets/all`, config);
+    const { data } = await axios.get(`/api/tickets/all`, config);
 
     dispatch({ type: TICKET_LIST_SUCCESS, payload: data });
   } catch (error) {
@@ -65,7 +65,7 @@ export const deleteTicket = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`https://hr-360.vercel.app/tickets/${id}`, config);
+    await axios.delete(`/api/tickets/${id}`, config);
 
     dispatch({ type: TICKET_DELETE_SUCCESS });
   } catch (error) {
@@ -101,7 +101,7 @@ export const createTicket =
       };
 
       const { data } = await axios.post(
-        `https://hr-360.vercel.app/tickets/`,
+        `/api/tickets/`,
         { description, priority, crtby, asgnto, deadline, status },
         config
       );
@@ -126,7 +126,7 @@ export const createTicket =
 export const editTicket = (id) => async (dispatch) => {
   try {
     dispatch({ type: TICKET_EDIT_REQUEST });
-    const { data } = await axios.get(`https://hr-360.vercel.app/tickets/${id}`);
+    const { data } = await axios.get(`/api/tickets/${id}`);
     dispatch({ type: TICKET_EDIT_SUCCESS, payload: data });
   } catch (error) {
     const message =
@@ -160,7 +160,7 @@ export const updateTicket = (ticket) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `https://hr-360.vercel.app/tickets/${ticket._id}`,
+      `/api/tickets/${ticket._id}`,
       ticket,
       config
     );

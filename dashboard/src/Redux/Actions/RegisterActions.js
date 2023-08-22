@@ -28,7 +28,7 @@ export const login = (role, email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      `https://hr-360.vercel.app/registers/login`,
+      `/api/registers/login`,
       { role, email, password },
       config
     );
@@ -65,7 +65,7 @@ export const register = (role, name, email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      `https://hr-360.vercel.app/registers`,
+      `/api/registers`,
       { role, name, email, password },
       config
     );
@@ -98,7 +98,7 @@ export const getRegisterDetails = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`https://hr-360.vercel.app/${id}`, config);
+    const { data } = await axios.get(`/${id}`, config);
     dispatch({ type: REGISTER_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     const message =
@@ -131,7 +131,7 @@ export const updateRegisterProfile = (register) => async (dispatch, getState) =>
       },
     };
 
-    const { data } = await axios.put(`https://hr-360.vercel.app/`, register, config);
+    const { data } = await axios.put(`/`, register, config);
     dispatch({ type: REGISTER_UPDATE_PROFILE_SUCCESS, payload: data });
     dispatch({ type: REGISTER_LOGIN_SUCCESS, payload: data });
 
