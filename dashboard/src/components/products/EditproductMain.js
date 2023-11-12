@@ -130,7 +130,7 @@ const EditProductMain = (props) => {
                     <>
                       <div className="mb-4">
                         <label htmlFor="employee_title" className="form-label">
-                        Employee Name
+                          Employee Name (Maximum 40 characters)
                         </label>
                         <input
                           type="text"
@@ -140,11 +140,12 @@ const EditProductMain = (props) => {
                           required
                           value={name}
                           onChange={handleNameChange} // Use the custom handler to filter non-alphabet characters
+                          maxLength="40" // Set the maximum length to 40 characters
                         />
                       </div>
                       <div className="mb-4">
                         <label htmlFor="employee_email" className="form-label">
-                        Employee Email
+                          Employee Email (Maximum 40 characters)
                         </label>
                         <input
                           type="text"
@@ -154,11 +155,15 @@ const EditProductMain = (props) => {
                           required
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
+                          maxLength="40" // Set the maximum length to 40 characters
                         />
                       </div>
                       <div className="mb-4">
-                        <label htmlFor="employee_department" className="form-label">
-                        Employee Department
+                        <label
+                          htmlFor="employee_department"
+                          className="form-label"
+                        >
+                          Employee Department (Maximum 40 characters)
                         </label>
                         <input
                           type="text"
@@ -168,11 +173,15 @@ const EditProductMain = (props) => {
                           required
                           value={dept}
                           onChange={handleDeptChange} // Use the custom handler to filter non-alphabet characters
+                          maxLength="40" // Set the maximum length to 40 characters
                         />
-                      </div>                      
+                      </div>
                       <div className="mb-4">
-                        <label htmlFor="employee_experience" className="form-label">
-                        Experience
+                        <label
+                          htmlFor="employee_experience"
+                          className="form-label"
+                        >
+                          Experience (Maximum 2 characters)
                         </label>
                         <input
                           type="number"
@@ -181,12 +190,17 @@ const EditProductMain = (props) => {
                           id="employee_experience"
                           required
                           value={experience}
-                          onChange={(e) => setExperience(e.target.value)}
+                          onChange={(e) => {
+                            const inputValue = e.target.value;
+                            const filteredValue = inputValue.slice(0, 2); // Limit to maximum 2 characters
+                            setExperience(filteredValue);
+                          }}
                         />
                       </div>
+
                       <div className="mb-4">
                         <label htmlFor="employee_salary" className="form-label">
-                          Salary
+                          Salary (Maximum 7 characters)
                         </label>
                         <input
                           type="number"
@@ -195,28 +209,25 @@ const EditProductMain = (props) => {
                           id="employee_salary"
                           required
                           value={salary}
-                          onChange={(e) => setSalary(e.target.value)}
+                          onChange={(e) => {
+                            const inputValue = e.target.value;
+                            const filteredValue = inputValue.slice(0, 7); // Limit to maximum 7 characters
+                            setSalary(filteredValue);
+                          }}
                         />
                       </div>
                       <div className="mb-4">
-                        <label className="form-label">Job Designation</label>
+                        <label className="form-label">
+                          Job Designation (Maximum 40 characters)
+                        </label>
                         <textarea
                           placeholder="Type here"
                           className="form-control"
                           required
                           value={designation}
                           onChange={handleDesignationChange} // Use the custom handler to filter non-alphabet characters
+                          maxLength="40" // Set the maximum length to 40 characters
                         ></textarea>
-                      </div>
-                      <div className="mb-4">
-                        <label className="form-label">Images</label>
-                        <input
-                          className="form-control"
-                          type="text"
-                          value={image}
-                          required
-                          onChange={(e) => setImage(e.target.value)}
-                        />
                       </div>
                     </>
                   )}

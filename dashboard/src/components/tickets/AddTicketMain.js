@@ -24,8 +24,8 @@ const AddTicketMain = () => {
 
   const dispatch = useDispatch();
 
-  const products = useSelector(({productList}) => productList.products)
-  console.log("products",products)
+  const products = useSelector(({ productList }) => productList.products);
+  console.log("products", products);
 
   const ticketCreate = useSelector((state) => state.ticketCreate);
   const { loading, error, ticket } = ticketCreate;
@@ -72,7 +72,9 @@ const AddTicketMain = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(createTicket(description, priority, crtby, asgnto, deadline, status));
+    dispatch(
+      createTicket(description, priority, crtby, asgnto, deadline, status)
+    );
   };
 
   return (
@@ -100,7 +102,7 @@ const AddTicketMain = () => {
                   {loading && <Loading />}
                   <div className="mb-4">
                     <label htmlFor="ticket_desc" className="form-label">
-                      Short Description
+                      Short Description (Maximum 40 characters)
                     </label>
                     <input
                       type="text"
@@ -109,12 +111,14 @@ const AddTicketMain = () => {
                       id="ticket_desc"
                       required
                       value={description}
-                      onChange={handleDescriptionChange} // Use the custom handler to filter non-alphabet characters
+                      onChange={handleDescriptionChange}
+                      maxLength="40" // Set the maximum length to 40 characters
                     />
                   </div>
+
                   <div className="mb-4">
                     <label htmlFor="ticket_priority" className="form-label">
-                      Priority Level
+                      Priority Level (Maximum 40 characters)
                     </label>
                     <input
                       type="text"
@@ -123,12 +127,14 @@ const AddTicketMain = () => {
                       id="ticket_priority"
                       required
                       value={priority}
-                      onChange={handlePriorityChange} // Use the custom handler to filter non-alphabet characters
+                      onChange={handlePriorityChange}
+                      maxLength="40" // Set the maximum length to 40 characters
                     />
                   </div>
+
                   <div className="mb-4">
                     <label htmlFor="ticket_crtby" className="form-label">
-                      Created by
+                      Created by (Maximum 40 characters)
                     </label>
                     <input
                       type="text"
@@ -137,7 +143,8 @@ const AddTicketMain = () => {
                       id="ticket_crtby"
                       required
                       value={crtby}
-                      onChange={handleCreatedByChange} // Use the custom handler to filter non-alphabet characters
+                      onChange={handleCreatedByChange}
+                      maxLength="40" // Set the maximum length to 40 characters
                     />
                   </div>
                   <div className="mb-4">
@@ -151,7 +158,9 @@ const AddTicketMain = () => {
                       value={asgnto}
                       onChange={(e) => setAsgnto(e.target.value)}
                     >
-                      <option id= "" value="">Select an Employee</option>
+                      <option id="" value="">
+                        Select an Employee
+                      </option>
                       {products.map((product) => (
                         <option key={product._id} value={product.name}>
                           {product.name}
@@ -171,11 +180,13 @@ const AddTicketMain = () => {
                       required
                       value={deadline}
                       onChange={(e) => setDeadline(e.target.value)}
+                      min={new Date().toISOString().split("T")[0]} // Set min to the current date
                     />
                   </div>
+
                   <div className="mb-4">
                     <label htmlFor="ticket_status" className="form-label">
-                      Status
+                      Status (Maximum 40 characters)
                     </label>
                     <input
                       type="text"
@@ -184,7 +195,8 @@ const AddTicketMain = () => {
                       id="ticket_status"
                       required
                       value={status}
-                      onChange={handleStatusChange} // Use the custom handler to filter non-alphabet characters
+                      onChange={handleStatusChange}
+                      maxLength="40" // Set the maximum length to 40 characters
                     />
                   </div>
                 </div>

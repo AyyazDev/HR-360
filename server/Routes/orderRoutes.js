@@ -28,7 +28,7 @@ orderRoute.get(
   })
 );
 
-// ADMIN GET ALL ORDER WITHOUT SEARCH AND PEGINATION
+// ADMIN GET ALL ORDER WITHOUT SEARCH AND PAGINATION
 orderRoute.get(
   "/all",
   protect,

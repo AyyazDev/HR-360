@@ -38,7 +38,7 @@ const TopTotal = (props) => {
             </span>
             <div className="text">
               <h6 className="mb-1">Total Remaining Amount</h6>
-              <span>{totalRemAmount}</span>
+              <span>Rs. {totalRemAmount}</span>
             </div>
           </article>
         </div>

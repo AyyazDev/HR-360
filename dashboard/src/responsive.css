@@ -81,6 +81,10 @@
     overflow-y: scroll;
   }
 
+  section.content-main{
+    width: 340px;
+   }
+
   .card.shadow{
     height: 380px;
     width: 340px;
@@ -95,12 +99,17 @@
     width: 300px;
     height: 38px;
   }
+   
 
   img.logo1{
-    margin-left: 47px;
+    margin-left: 53px;
     margin-top: 40px;
     width: 250px;
     height: 110px;
+  }
+
+  h4.card-title{
+    margin-left: 39px;
   }
 
   input.form-control{
@@ -180,7 +189,7 @@
   }
 
   iframe{ 
-    width: 2988px;
+    width: 300px;
     height: auto;
   }
 

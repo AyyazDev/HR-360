@@ -6,7 +6,6 @@ import { login } from "../Redux/Actions/userActions";
 import Message from "./../components/LoadingError/Error";
 import ReCAPTCHA from "react-google-recaptcha";
 
-
 const Login = ({ history }) => {
   const [role, setRole] = useState("");
   const [email, setEmail] = useState("");
@@ -27,7 +26,7 @@ const Login = ({ history }) => {
       history.push("/emp");
     } else if (role === "Client" && userInfo) {
       history.push("/client");
-    }
+    } 
   }, [role, userInfo, history]);
 
   const handleCaptchaChange = (response) => {
@@ -36,9 +35,20 @@ const Login = ({ history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+
+    // Password regex pattern with your requirements
+    const passwordPattern =
+      /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,20}$/;
+
     if (captchaResponse) {
-      dispatch(login(role, email, password));
-      captchaRef.current.reset();
+      if (!password.match(passwordPattern)) {
+        setError(
+          "Password must be between 6 and 20 characters and contain at least one special character and one number."
+        );
+      } else {
+        dispatch(login(role, email, password));
+        captchaRef.current.reset();
+      }
     } else {
       setError("Please fill the reCAPTCHA first.");
     }
@@ -47,11 +57,7 @@ const Login = ({ history }) => {
   return (
     <>
       <Toast />
-      <img
-        src="/images/logo.png"
-        className="logo1"
-        alt="HR 360 Icon"
-      />
+      <img src="/images/logo.png" className="logo1" alt="HR 360 Icon" />
       <div className="card shadow mx-auto" style={{ maxWidth: "380px" }}>
         <div className="card-body">
           {error && <Message variant="alert-danger">{error}</Message>}
@@ -79,6 +85,7 @@ const Login = ({ history }) => {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                maxLength="40" // Set the maximum length to 40 characters
               />
             </div>
 
@@ -89,13 +96,15 @@ const Login = ({ history }) => {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,20}$"
+                title="Password must be between 6 and 20 characters and contain at least one letter, one number, and one special character (@$!%*#?&)"
               />
             </div>
 
             <div className="captcha mb-4">
               <ReCAPTCHA
                 ref={captchaRef}
-                sitekey="6LeKsKonAAAAADDPyp1G52lFkWvs6-cX4_7xrIwB"
+                sitekey="6LfalaUmAAAAACIC-9s8wFy8o0cN1n5EZExAVPKY"
                 onChange={handleCaptchaChange}
               />
             </div>

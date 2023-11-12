@@ -134,7 +134,7 @@ const EditTicketMain = (props) => {
                     <>
                       <div className="mb-4">
                         <label htmlFor="ticket_desc" className="form-label">
-                          Short Description
+                          Short Description (Maximum 40 characters)
                         </label>
                         <input
                           type="text"
@@ -144,11 +144,13 @@ const EditTicketMain = (props) => {
                           required
                           value={description}
                           onChange={handleDescriptionChange} // Use the custom handler to filter non-alphabet characters
+                          maxLength="40" // Set the maximum length to 40 characters
                         />
                       </div>
+
                       <div className="mb-4">
                         <label htmlFor="ticket_priority" className="form-label">
-                          Priority Level
+                          Priority Level (Maximum 40 characters)
                         </label>
                         <input
                           type="text"
@@ -158,11 +160,13 @@ const EditTicketMain = (props) => {
                           required
                           value={priority}
                           onChange={handlePriorityChange} // Use the custom handler to filter non-alphabet characters
+                          maxLength="40" // Set the maximum length to 40 characters
                         />
                       </div>
+
                       <div className="mb-4">
                         <label htmlFor="ticket_crtby" className="form-label">
-                          Created by
+                          Created by (Maximum 40 characters)
                         </label>
                         <input
                           type="text"
@@ -172,8 +176,10 @@ const EditTicketMain = (props) => {
                           required
                           value={crtby}
                           onChange={handleCreatedByChange} // Use the custom handler to filter non-alphabet characters
+                          maxLength="40" // Set the maximum length to 40 characters
                         />
                       </div>
+
                       <div className="mb-4">
                         <label htmlFor="ticket_asgnto" className="form-label">
                           Assigned to
@@ -207,11 +213,12 @@ const EditTicketMain = (props) => {
                           required
                           value={deadline}
                           onChange={(e) => setDeadline(e.target.value)}
+                          min={new Date().toISOString().split("T")[0]} // Set min to the current date
                         />
                       </div>
                       <div className="mb-4">
                         <label htmlFor="ticket_status" className="form-label">
-                          Status
+                          Status (Maximum 40 characters)
                         </label>
                         <input
                           type="text"
@@ -221,6 +228,7 @@ const EditTicketMain = (props) => {
                           required
                           value={status}
                           onChange={handleStatusChange} // Use the custom handler to filter non-alphabet characters
+                          maxLength="40" // Set the maximum length to 40 characters
                         />
                       </div>
                     </>

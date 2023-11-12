@@ -99,7 +99,7 @@ const AddAttendance = () => {
                         <input
                           type="radio"
                           name={`attendance_${product._id}`}
-                          value={1} // Set the value as 1 for absence
+                          value={1} // Set the value as 1 for absent
                         />{" "}
                         Absent
                       </span>
@@ -107,7 +107,7 @@ const AddAttendance = () => {
                         <input
                           type="radio"
                           name={`attendance_${product._id}`}
-                          value={0} // Set the value as 0 for presence
+                          value={0} // Set the value as 0 for present
                         />{" "}
                         Present
                       </span>

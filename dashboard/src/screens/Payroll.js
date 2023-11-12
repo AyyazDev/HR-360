@@ -51,7 +51,7 @@ const Payroll = () => {
                     <td>{product.email}</td>
                     <td>{product.dept}</td>
                     <td>{product.designation}</td>
-                    <td>{product.salary}</td>
+                    <td>Rs. {product.salary}</td>
                   </tr>
                 ))
               ) : (
