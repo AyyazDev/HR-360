@@ -37,7 +37,7 @@ const connectDatabase = async () => {
     console.log("Cached connection updated.");
     return conn;
   } catch (error) {
-    console.log("Connection attempt failed. Checking error details...");
+    console.log("Connection attempt failed. Checking details...");
     console.error("MongoDB connection error:", error.message);
 
     if (error.reason) {
