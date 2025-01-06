@@ -13,7 +13,11 @@ const connectDatabase = async () => {
 
   console.log("No cached connection found. Proceeding to connect.");
   try {
-    console.log("MongoDB URI:", process.env.MONGO_URL);
+    const mongoURI = process.env.MONGO_URL;
+    if (!mongoURI) {
+      throw new Error("MONGO_URL is not defined. Check your environment variables.");
+    }
+    console.log("MongoDB URI:", mongoURI);
 
     console.log("Setting strictQuery to false...");
     mongoose.set("strictQuery", false);
@@ -21,13 +25,12 @@ const connectDatabase = async () => {
     const startTime = Date.now();
     console.log("Attempting to connect to MongoDB...");
 
-    const conn = await mongoose.connect(process.env.MONGO_URL, {
+    const conn = await mongoose.connect(mongoURI, {
       useUnifiedTopology: true,
       useNewUrlParser: true,
       serverSelectionTimeoutMS: 10000, // Timeout for server selection
       connectTimeoutMS: 10000,        // Timeout for connection establishment
     });
-    console.log("Connection established. Checking connection details...");
 
     const endTime = Date.now();
     console.log(`MongoDB Connected: ${conn.connection.host}`);
@@ -37,19 +40,14 @@ const connectDatabase = async () => {
     console.log("Cached connection updated.");
     return conn;
   } catch (error) {
-    console.log("Connection attempt failed. Checking details...");
     console.error("MongoDB connection error:", error.message);
+    console.error("Full error:", error);
 
-    if (error.reason) {
-      console.error("Error reason:", error.reason);
-    }
+    // Provide specific instructions
+    console.log("Check if the MongoDB URI, username, password, and IP whitelist are correctly configured.");
+    console.log("Ensure your network can access the MongoDB Atlas cluster.");
 
-    if (error.stack) {
-      console.error("Stack trace:", error.stack);
-    }
-
-    console.log("Re-throwing the error for upstream handling...");
-    throw error;
+    throw error; // Re-throw the error for upstream handling
   }
 };
 
