@@ -12,7 +12,7 @@ const connectDatabase = async () => {
   }
 
   console.log("No cached connection found. Proceeding to connect.");
-  console.log("MongoDB URI:", mongoURI);
+  console.log("MongoDB URI:", process.env.MONGO_URL);
   try {
     if( process.env.MONGO_URL === 'mongodb+srv://hr360fyp:ZhcrE2oyzf9qw2Ui@hr360.jdb3jcg.mongodb.net/shop?retryWrites=true&w=majority'){
       throw new Error("MONGO_URL is not matching.");
